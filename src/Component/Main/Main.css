@@ -1,0 +1,38 @@
+header{
+    max-height:60px;
+}
+main{
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.parent-box{
+    display: grid;
+    height: 30rem;
+    grid-template-columns: repeat(3,10rem);
+    width: 30rem;
+}
+.row{
+    display: flex;
+    height: 33.33%;
+}
+.box{
+    border: 3px solid;
+    font-size: 6rem;
+    display: flex;
+    height: 10rem;
+    align-items: center;
+    justify-content: center;
+    margin: -1px;
+}
+
+.br-0{
+    border-right: 0;
+}
+.br-0{
+    border-right: 0;
+}
+.bt-0{
+    border-top: 0;
+}
