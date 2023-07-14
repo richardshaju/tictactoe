@@ -1,11 +1,21 @@
 header{
-    max-height:60px;
+    height:70px;
+    background-color:#b0bfc5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header p{
+    font-size: 27px;
+    
+    font-family: 'Montserrat', sans-serif;
 }
 main{
     height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #DCE1E3;
 }
 .parent-box{
     display: grid;
@@ -18,21 +28,20 @@ main{
     height: 33.33%;
 }
 .box{
-    border: 3px solid;
+    border: 3.3px solid ;
+    border-color: #510f0f;
     font-size: 6rem;
     display: flex;
     height: 10rem;
     align-items: center;
     justify-content: center;
     margin: -1px;
+    font-family: cursive;
 }
 
-.br-0{
-    border-right: 0;
+.x{
+    color: rgb(255, 0, 0);
 }
-.br-0{
-    border-right: 0;
-}
-.bt-0{
-    border-top: 0;
+.o{
+    color: rgb(8, 0, 255);
 }

@@ -3,18 +3,42 @@ import "./Main.css";
 import Board from "./Board";
 
 function Main() {
-  const [board, setboard] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-  const [player, setplayer] = useState(true);
   var enableAI = 0;
-
+  const [board, setboard] = useState(Array(9).fill(0));
+  const [player, setplayer] = useState(false);
   const [boardFull, setboardFull] = useState(0);
   const [data, setdata] = useState("");
+  const [showOption, setshowOption] = useState(false);
+  const [showStart, setshowStart] = useState(true);
+  const [restart, setrestart] = useState(false);
 
-  function firstAI() {
-    compTurn(board)
+  function DoRestart() {
+    setboard(Array(9).fill(0));
+    setboardFull(0);
+    start();
+    setrestart(false);
+    setdata("");
   }
-  
+
+  function firstOrSecond(e) {
+    e.preventDefault();
+    let value = e.target.value;
+    console.log(e.target.value);
+    if (value == 2) {
+      compTurn(board);
+      setshowOption(false);
+    } else {
+      setshowOption(false);
+      setdata("Play ONNN");
+    }
+    //value === 2 ?  : setdata("Play ONN");
+    setplayer(true);
+  }
+
+  function start() {
+    setshowOption(true);
+    setshowStart(false);
+  }
   function handleClick(boxIdx) {
     player ? Main(boxIdx) : console.log("Stop");
   }
@@ -41,7 +65,6 @@ function Main() {
       });
       checkResult(update);
       setboard(update);
-      setboardFull(boardFull + 1);
       console.log(update);
       if (enableAI) {
         compTurn(update);
@@ -49,24 +72,32 @@ function Main() {
         console.log("Ai not enalbled");
       }
     } else {
-      console.log("Draw??");
+      console.log();
     }
   };
   function checkResult(board, value) {
     let result = analayseBoard(board);
-    if (value) {
+    if (boardFull == 4) {
       setplayer(false);
-      setdata("Draw!!");
-      console.log("DRAW");
+      setTimeout(() => {
+        setdata("Draw!!");
+        setrestart(true);
+        console.log("DRAW");
+      }, 500);
     }
     if (result === 1) {
       setplayer(false);
-      setdata("You are Loser");
+      setTimeout(() => {
+        setdata("You are Loser");
+        setrestart(true);
+      }, 500);
+
       console.log("AI Wins");
     }
     if (result === -1) {
       setplayer(false);
       setdata("You wins");
+      setrestart(true);
       console.log("You wins");
     }
   }
@@ -135,21 +166,33 @@ function Main() {
         return value;
       }
     });
-    setboard(update);
+    setTimeout(() => {
+      setboard(update);
+    }, 500);
     setboardFull(boardFull + 1);
-    //console.log("BF"+boardFull);
+    console.log("BF" + boardFull);
     checkResult(update);
     //console.log(update);
   }
   return (
     <div className="main">
       <header>
-        <p>Tic Tac Toe</p>
+        <p>TIC TAC TOE</p>
       </header>
-      <button onClick={firstAI}>HIII</button>
-      <h1>{data}</h1>
+
       <Board board={board} onClick={handleClick} />
+      {showStart ? <button onClick={start}>START</button> : console.log()}
+      {showOption ? (
+        <form onChange={firstOrSecond}>
+          play 1 <input type="radio" name="1" id="1" value={1} /> or 2
+          <input type="radio" name="2" id="2" value={2} />
+        </form>
+      ) : (
+        <br />
+      )}
+      <h1>{data}</h1>
       <footer>
+        {restart ? <button onClick={DoRestart}>RESTART</button> : console.log()}
         <p>Copyright</p>
       </footer>
     </div>
