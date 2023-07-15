@@ -234,7 +234,7 @@ function Main() {
         <div className="left">
           <p>
             Designed and Developed by{" "}
-            <a href="www.richard.is-a.dev"> Richard Shaju </a> © 2023
+            <a href="https://richard.is-a.dev/"> Richard Shaju </a> © 2023
           </p>
         </div>
         <div className="right">
