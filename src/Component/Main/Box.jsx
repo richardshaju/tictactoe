@@ -6,17 +6,18 @@ function Box({value,onClick}) {
     <div className={style} onClick={onClick}> {(() => {
         if (value == 0) {
           return (
-            ""
+            <p></p> 
           )
         } 
          if (value == 1) {
           return (
-            "O"
+             <p>O</p>
           )
         } 
          if (value == -1) {
           return (
-            "X"
+            <p>X</p>
+
           )
         }
       })()}</div>

@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import "./Main.css";
 import Board from "./Board";
-
+import click from "./audio/click.mp3";
+import loss from "./audio/loss.mp3";
+import draw from "./audio/draw.mp3";
+import stop from "./audio/stop.mp3";
 function Main() {
   var enableAI = 0;
   const [board, setboard] = useState(Array(9).fill(0));
@@ -11,6 +14,7 @@ function Main() {
   const [showOption, setshowOption] = useState(false);
   const [showStart, setshowStart] = useState(true);
   const [restart, setrestart] = useState(false);
+  const [color, setcolor] = useState("red");
 
   function DoRestart() {
     setboard(Array(9).fill(0));
@@ -25,13 +29,14 @@ function Main() {
     let value = e.target.value;
     console.log(e.target.value);
     if (value == 2) {
+      setcolor("red");
+      setdata("Start Playing!");
       compTurn(board);
       setshowOption(false);
     } else {
       setshowOption(false);
-      setdata("Play ONNN");
+      setdata("Start Playing!");
     }
-    //value === 2 ?  : setdata("Play ONN");
     setplayer(true);
   }
 
@@ -40,7 +45,9 @@ function Main() {
     setshowStart(false);
   }
   function handleClick(boxIdx) {
-    player ? Main(boxIdx) : console.log("Stop");
+    new Audio(click).play();
+
+    player ? Main(boxIdx) : new Audio(stop).play();
   }
 
   const Main = (boxIdx) => {
@@ -80,7 +87,9 @@ function Main() {
     if (boardFull == 4) {
       setplayer(false);
       setTimeout(() => {
-        setdata("Draw!!");
+        setcolor("Blue");
+        setdata("Draw !!");
+        new Audio(draw).play();
         setrestart(true);
         console.log("DRAW");
       }, 500);
@@ -89,10 +98,10 @@ function Main() {
       setplayer(false);
       setTimeout(() => {
         setdata("You are Loser");
+        new Audio(loss).play();
+
         setrestart(true);
       }, 500);
-
-      console.log("AI Wins");
     }
     if (result === -1) {
       setplayer(false);
@@ -179,21 +188,58 @@ function Main() {
       <header>
         <p>TIC TAC TOE</p>
       </header>
-
       <Board board={board} onClick={handleClick} />
-      {showStart ? <button onClick={start}>START</button> : console.log()}
-      {showOption ? (
-        <form onChange={firstOrSecond}>
-          play 1 <input type="radio" name="1" id="1" value={1} /> or 2
-          <input type="radio" name="2" id="2" value={2} />
-        </form>
-      ) : (
-        <br />
-      )}
-      <h1>{data}</h1>
+      <div className="tools">
+        {showStart ? (
+          <button id="start" onClick={start}>
+            START
+          </button>
+        ) : (
+          console.log()
+        )}
+        {showOption ? (
+          <form onChange={firstOrSecond}>
+            <label>Play 1st</label>
+            <input type="radio" name="1" id="1" value={1} />{" "}
+            <label>or 2nd</label>
+            <input type="radio" name="2" id="2" value={2} />
+          </form>
+        ) : (
+          console.log()
+        )}
+        <p className={color}>{data}</p>
+        {restart ? (
+          <button id="restart" onClick={DoRestart}>
+            RESTART
+          </button>
+        ) : (
+          console.log()
+        )}
+      </div>
+      <div className="about">
+        <div className="data">
+          <h4>
+            <u>ABOUT TIC TAC TOE</u>
+          </h4>
+          Tic-tac-toe (American English), noughts and crosses (Commonwealth
+          English), or Xs and Os (Canadian or Irish English) is a
+          paper-and-pencil game for two players who take turns marking the
+          spaces in a three-by-three grid with X or O. The player who succeeds
+          in placing three of their marks in a horizontal, vertical, or diagonal
+          row is the winner. It is a solved game, with a forced draw assuming
+          best play from both players.
+        </div>
+      </div>
       <footer>
-        {restart ? <button onClick={DoRestart}>RESTART</button> : console.log()}
-        <p>Copyright</p>
+        <div className="left">
+          <p>
+            Designed and Developed by{" "}
+            <a href="www.richard.is-a.dev"> Richard Shaju </a> © 2023
+          </p>
+        </div>
+        <div className="right">
+          <p>TICTACTOE</p>
+        </div>
       </footer>
     </div>
   );

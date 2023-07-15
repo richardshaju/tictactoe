@@ -1,47 +1,197 @@
-header{
-    height:70px;
-    background-color:#b0bfc5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+header {
+  height: 85px;
+  background-color: #96c2d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-header p{
-    font-size: 27px;
-    
-    font-family: 'Montserrat', sans-serif;
-}
-main{
-    height: 700px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #DCE1E3;
-}
-.parent-box{
-    display: grid;
-    height: 30rem;
-    grid-template-columns: repeat(3,10rem);
-    width: 30rem;
-}
-.row{
-    display: flex;
-    height: 33.33%;
-}
-.box{
-    border: 3.3px solid ;
-    border-color: #510f0f;
-    font-size: 6rem;
-    display: flex;
-    height: 10rem;
-    align-items: center;
-    justify-content: center;
-    margin: -1px;
-    font-family: cursive;
+header p {
+  font-size: 27px;
+  font-family: "Montserrat", sans-serif;
 }
 
-.x{
-    color: rgb(255, 0, 0);
+main {
+  height: 315px;
+  display: flex;
+  padding-bottom: 6rem;
+  padding-top: 4rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #dce1e3;
 }
-.o{
-    color: rgb(8, 0, 255);
+.parent-box {
+  display: grid;
+  height: 20rem;
+  grid-template-columns: repeat(3, 9rem);
+}
+.row {
+  display: flex;
+  height: 33.33%;
+}
+.box {
+  border: 3.3px solid;
+  border-color: #510f0f;
+  font-size: 6rem;
+  display: flex;
+  height: 8rem;
+  width: 8.8rem;
+  align-items: center;
+  justify-content: center;
+  margin: -2px;
+  font-family: "Montserrat", sans-serif;
+
+  animation-duration: 0.3s;
+  animation-name: fadeAndScale;
+  animation-timing-function: cubic-bezier(0.71, 0.55, 0.62, 1.57);
+}
+
+.box:hover {
+  background-color: #6ecfff75;
+}
+@keyframes fadeAndScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9, 0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+.x {
+  color: rgb(255, 0, 0);
+}
+.o {
+  color: rgb(8, 0, 255);
+}
+.tools {
+  background-color: #dce1e3;
+  padding-bottom: 3rem;
+}
+.tools button {
+  width: 6rem;
+  height: 2rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 7px;
+  background-color: #2d4f7d;
+}
+
+label {
+  padding-right: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.tools p {
+  font-size: 20px;
+}
+.Blue {
+  color: rgb(0, 0, 128);
+  font-weight: 600;
+}
+.red {
+  color: red;
+  font-weight: 600;
+}
+#start:hover {
+  background-color: #092347;
+}
+
+#restart {
+  background-color: #055b25;
+}
+#restart:hover {
+  background-color: #000f05;
+}
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #96c2d3;
+  padding: 50px;
+}
+.data {
+  width: 45%;
+  flex-direction: column;
+  display: flex;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  height: 23px;
+  color: #ffff;
+  background-color: rgb(17, 37, 65);
+  padding: 2rem;
+}
+.left {
+  font-size: 14px;
+}
+.left a {
+  text-decoration: none;
+  color: wheat;
+}
+.right {
+  font-size: 24px;
+  margin-top: 3px;
+  font-family: "Libre Barcode 39 Text", cursive;
+}
+@media screen and (max-width: 1024px) {
+  .box {
+    height: 7rem;
+    width: 7.8rem;
+  }
+  .parent-box {
+    grid-template-columns: repeat(3, 8rem);
+  }
+  main {
+    padding-bottom: 3rem;
+  }
+  .data{
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .box {
+    height: 6rem;
+    font-size: 4.4rem;
+    width: 6.8rem;
+  }
+  .parent-box {
+    height: 18rem;
+
+    grid-template-columns: repeat(3, 7rem);
+  }
+  main {
+    padding-bottom: 2rem;
+  }
+  .data{
+    width: 70%;
+  }
+  footer{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .box {
+    height: 5rem;
+    font-size: 3.4rem;
+    width: 4.8rem;
+  }
+  .parent-box {
+    height: 14rem;
+    grid-template-columns: repeat(3, 5rem);
+  }
+  main {
+    padding-bottom: 0.1rem;
+  }
+  .data{
+    width: 100%;
+  }
+  footer{
+    height: 40px;
+  }
 }
